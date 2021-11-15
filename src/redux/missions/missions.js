@@ -18,10 +18,11 @@ export const fetchMissions = (dispatch) => {
     axios
         .get('https://api.spacexdata.com/v3/missions')
         .then((res) => {
-            console.log(res);
-            dispatch(getMissions(res));
+            console.log(res.data);
+            dispatch(getMissions(res.data));
         })
         .catch((err) => console.log(err));
 };
 
+console.log(fetchMissions())
 export default missionsReducer;

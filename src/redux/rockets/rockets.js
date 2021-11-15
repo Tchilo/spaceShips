@@ -18,7 +18,7 @@ export const fetchRockets = (dispatch) => {
     axios
         .get('https://api.spacexdata.com/v3/rockets')
         .then((res) => {
-            console.log(res);
+            console.log(res.data);
             dispatch(getRockets(res));
         })
         .catch((err) => console.log(err));
