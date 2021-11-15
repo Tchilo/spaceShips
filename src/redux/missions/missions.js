@@ -1,5 +1,4 @@
 /* eslint-disable */
-
 import axios from 'axios';
 
 const GET_MISSIONS = 'GET_MISSIONS';
