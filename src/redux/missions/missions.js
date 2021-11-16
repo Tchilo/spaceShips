@@ -3,7 +3,10 @@ import axios from 'axios';
 
 const GET_MISSIONS = 'GET_MISSIONS';
 
-const getMissions = (payload) => ({ type: GET_MISSIONS, payload });
+const getMissions = (payload) => ({
+    type: GET_MISSIONS,
+    payload
+});
 
 const missionsReducer = (state = [], actions) => {
     switch (actions.type) {
@@ -14,15 +17,15 @@ const missionsReducer = (state = [], actions) => {
     }
 };
 
-export const fetchMissions = (dispatch) => {
+export const fetchMissions = () => async (dispatch) => {
     axios
         .get('https://api.spacexdata.com/v3/missions')
         .then((res) => {
-            console.log(res.data);
-            dispatch(getMissions(res.data));
+            const missions = res.data;
+            // console.log(typeof (missions))
+            dispatch(getMissions(missions));
         })
         .catch((err) => console.log(err));
 };
 
-console.log(fetchMissions())
 export default missionsReducer;
