@@ -1,4 +1,6 @@
 /* eslint-disable */
+import { useSelector } from 'react-redux';
+
 import axios from 'axios';
 
 const GET_MISSIONS = 'GET_MISSIONS';
@@ -8,21 +10,22 @@ const getMissions = (payload) => ({
     payload
 });
 
-const missionsReducer = (state = [], actions) => {
+
+const missionsReducer = (state = { data: [] }, actions) => {
     switch (actions.type) {
         case GET_MISSIONS:
-            return [...state, actions.payload];
+            return { ...state, data: actions.payload };
         default:
             return state;
     }
 };
 
 export const fetchMissions = () => async (dispatch) => {
-    axios
+    await axios
         .get('https://api.spacexdata.com/v3/missions')
         .then((res) => {
             const missions = res.data;
-            // console.log(typeof (missions))
+            console.log(missions)
             dispatch(getMissions(missions));
         })
         .catch((err) => console.log(err));

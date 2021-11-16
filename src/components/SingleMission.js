@@ -1,11 +1,11 @@
 /* eslint-disable */
 import React from 'react';
 
-function SingleMission(mission_name) {
+function SingleMission({ mission_name, description }) {
     return (
         <div>
             <h2>{mission_name}</h2>
-            <p>mission description</p>
+            <p>{description}</p>
         </div>
     );
 }
