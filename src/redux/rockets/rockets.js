@@ -1,27 +1,34 @@
-/* eslint-disable */
-import axios from 'axios';
+import * as api from '../../api/api';
 
 const GET_ROCKETS = 'GET_ROCKETS';
 
-const getRockets = (payload) => ({ type: GET_ROCKETS, payload });
+// Action creator
 
-const rocketsReducer = (state = [], actions) => {
-    switch (actions.type) {
-        case GET_ROCKETS:
-            return [...state, actions.payload];
-        default:
-            return state;
-    }
+export const getRockets = () => async (dispatch) => {
+  try {
+    const data = await api.fetchRockets();
+    dispatch({ type: GET_ROCKETS, payload: data });
+  } catch (error) {
+    throw new Error(error.message);
+  }
 };
 
-export const fetchRockets = (dispatch) => {
-    axios
-        .get('https://api.spacexdata.com/v3/rockets')
-        .then((res) => {
-            console.log(res.data);
-            dispatch(getRockets(res));
-        })
-        .catch((err) => console.log(err));
+const rocketReducer = (state = [], action) => {
+  switch (action.type) {
+    case GET_ROCKETS:
+
+      return action.payload.map((rocket) => {
+        const {
+          id, rocket_name: names, type, flickr_images: images, description,
+        } = rocket;
+        return {
+          id, names, type, images, description,
+        };
+      });
+
+    default:
+      return state;
+  }
 };
 
-export default rocketsReducer;
+export default rocketReducer;
