@@ -1,32 +1,57 @@
 /* eslint-disable */
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import SingleMission from './SingleMission';
-import { fetchMissions } from '../redux/missions/missions';
+import {
+  fetchMissions,
+  joinMission,
+  leaveMission,
+} from '../redux/missions/missions';
+
 
 function Missions() {
-  const missions = useSelector((state) => state.missionsReducer.data);
-  // const missions = missions1[0];
-  // const isloading = useSelector((state) => state.missionsReducer.isloading)
   const dispatch = useDispatch();
+  const missions = useSelector((state) => state.missions.missions);
+
   useEffect(() => {
-    // if (isloading == true) {
-    dispatch(fetchMissions());
-    // }
+    if (!missions.length) {
+      dispatch(fetchMissions);
+    }
   }, []);
-  // console.log(missions.map((mission) => mission.mission_id));
+
+  const handleJoin = (id) => dispatch(joinMission(id));
+  const handleLeave = (id) => dispatch(leaveMission(id));
+
+
   return (
-    <div>
-      {missions.map((m) =>
-        <SingleMission
-          mission_name={m.mission_name}
-          key={m.mission_id}
-          // key={m.mission_id}
-          description={m.description}
-        />
-      )}
+    <ul>
+      {missions.map(({
+        id, name, description, reserved,
+      }) => (
+        <li key={id}>
+          <h2 className="fw-bold">{name}</h2>
+          <p>{description}</p>
+          <p className="align-middle">
+            {reserved && <h5>Active Member</h5>}
+            {!reserved && <h5>NOT A MEMBER</h5>}
+          </p>
+          {reserved && (
+            <button
+              onClick={() => handleLeave(id)}
+            >
+              Leave Mission
+            </button>
+          )}
+          {!reserved && (
+            <button
+              onClick={() => handleJoin(id)}
+            >
+              Join Mission
+            </button>
+          )}
+        </li>
+      ))}
       <h2>missions</h2>
-    </div>
+    </ul>
   );
 }
 
