@@ -1,51 +1,90 @@
-import * as api from '../../api/api';
+/* eslint-disable no-case-declarations */
+// import * as api from '../../api/api';
 
+const url = 'https://api.spacexdata.com/v3/rockets';
 const GET_ROCKETS = 'GET_ROCKETS';
-const RESERVE_ROCKETS = 'RESERVE_ROCKETS';
-const CANCEL_RESERVE = 'CANCEL_RESERVE';
+const RESERVE_ROCKET = 'RESERVE_ROCKETS';
+const FETCHING_ROCKETS_FAILED = 'FETCHING_ROCKETS_FAILED';
+const CANCEL_RESERVATION = 'CANCEL_RESERVATION';
 
-// Action creator
+const initialState = {
+  rockets: [],
+};
 
-export const getRockets = () => async (dispatch) => {
+const loadRockets = (rockets) => ({
+  type: GET_ROCKETS,
+  payload: rockets,
+});
+
+export const reserve = (id) => ({
+  type: RESERVE_ROCKET,
+  id,
+});
+
+export const cancelReservation = (id) => ({
+  type: CANCEL_RESERVATION,
+  id,
+});
+
+const fetchingDataFailed = (err) => ({
+  type: FETCHING_ROCKETS_FAILED,
+  payload: err,
+});
+
+export const fetchRockets = async (dispatch) => {
   try {
-    const data = await api.fetchRockets();
-    dispatch({ type: GET_ROCKETS, payload: data });
-  } catch (error) {
-    throw new Error(error.message);
+    const response = await fetch(url);
+    const rockets = await response.json();
+    dispatch(
+      loadRockets(
+        rockets.map((rocket) => {
+          const {
+            id, rocket_name: names, flickr_images: images, description,
+          } = rocket;
+          return {
+            id, names, images, description,
+          };
+        }),
+      ),
+    );
+  } catch (err) {
+    err.description = 'An error occurred, please try again later';
+    dispatch(fetchingDataFailed(err.description));
   }
 };
 
-export const reserveRocket = (payload) => ({
-  type: RESERVE_ROCKETS,
-  payload,
-});
-
-export const cancelReservation = (payload) => ({
-  type: CANCEL_RESERVE,
-  payload,
-});
-const rocketReducer = (state = [], action) => {
+const rocketReducer = (state = initialState, action) => {
   switch (action.type) {
     case GET_ROCKETS:
+      return {
+        ...state,
+        rockets: action.payload,
+      };
 
-      return action.payload.map((rocket) => {
-        const {
-          id, rocket_name: names, type, flickr_images: images, description,
-        } = rocket;
-        return {
-          id, names, type, images, description,
-        };
+    case FETCHING_ROCKETS_FAILED:
+      return {
+        ...state,
+        loading: false,
+        error: action.payload,
+      };
+    case RESERVE_ROCKET:
+      const newState = state.rockets.map((rocket) => {
+        if (rocket.id !== action.id) { return rocket; }
+        return { ...rocket, reserved: true };
       });
-
-    case RESERVE_ROCKETS:
-    case CANCEL_RESERVE:
-      return state.map((rocket) => {
-        if (rocket.id !== parseInt(action.payload, 10)) {
-          return rocket;
-        }
-        return { ...rocket, reserved: !rocket.reserved };
+      return {
+        ...state,
+        rockets: newState,
+      };
+    case CANCEL_RESERVATION:
+      const nextState = state.rockets.map((rocket) => {
+        if (rocket.id !== action.id) { return rocket; }
+        return { ...rocket, reserved: false };
       });
-
+      return {
+        ...state,
+        rockets: nextState,
+      };
     default:
       return state;
   }
