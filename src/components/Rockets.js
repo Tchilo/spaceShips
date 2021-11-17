@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { getRockets } from '../redux/rockets/rockets';
+import { cancelReservation, getRockets, reserveRocket } from '../redux/rockets/rockets';
 
 function Rockets() {
   const rocketStore = useSelector((state) => state.rocketReducer);
   const [showResrved, setshowReserved] = useState(true);
   const dispatch = useDispatch();
+  const handleReserve = (id) => dispatch(reserveRocket(id));
+  const handleCancel = (id) => dispatch(cancelReservation(id));
+
   useEffect(() => {
     if (!rocketStore.length) {
       dispatch(getRockets());
@@ -24,8 +27,28 @@ function Rockets() {
             {rocket.names}
             {' '}
             <p>{description}</p>
-            {(showResrved && <button type="button" onClick={() => setshowReserved(false)}>Rocket Reserve</button>)}
-            {(!showResrved && <button type="button" onClick={() => setshowReserved(true)}>Cancel Reservation </button>)}
+            {(showResrved && (
+            <button
+              type="button"
+              onClick={(id) => {
+                setshowReserved(false);
+                handleReserve(id);
+              }}
+            >
+              Rocket Reserve
+            </button>
+            ))}
+            {(!showResrved && (
+            <button
+              type="button"
+              onClick={(id) => {
+                setshowReserved(true);
+                handleCancel(id);
+              }}
+            >
+              Cancel Reservation
+            </button>
+            ))}
           </li>
         </ul>
 
