@@ -31,10 +31,11 @@ const fetchingDataFailed = (err) => ({
   payload: err,
 });
 
-export const fetchRockets = async (dispatch) => {
+export const fetchRockets = () => async (dispatch) => {
   try {
     const response = await fetch(url);
     const rockets = await response.json();
+    console.log(rockets);
     dispatch(
       loadRockets(
         rockets.map((rocket) => {
