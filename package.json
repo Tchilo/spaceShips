@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@testing-library/user-event": "^12.1.10",
     "axios": "^0.24.0",
     "big.js": "^6.1.1",
     "bootstrap": "^5.1.3",
