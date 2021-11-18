@@ -1,5 +1,4 @@
 /* eslint-disable no-case-declarations */
-// import * as api from '../../api/api';
 
 const url = 'https://api.spacexdata.com/v3/rockets';
 const GET_ROCKETS = 'GET_ROCKETS';
@@ -35,14 +34,16 @@ export const fetchRockets = () => async (dispatch) => {
   try {
     const response = await fetch(url);
     const rockets = await response.json();
+
     dispatch(
       loadRockets(
         rockets.map((rocket) => {
           const {
-            id, rocket_name: names, flickr_images: images, description,
+            id, rocket_name: names, flickr_images: images, description, reserved = false,
           } = rocket;
+
           return {
-            id, names, images, description,
+            id, names, images, description, reserved,
           };
         }),
       ),
@@ -68,23 +69,23 @@ const rocketReducer = (state = initialState, action) => {
         error: action.payload,
       };
     case RESERVE_ROCKET:
-      const newState = state.rockets.map((rocket) => {
-        if (rocket.id !== action.payload.id) { return rocket; }
-        return { ...rocket, reserved: true };
+      const newState = state.rockets.map((item) => {
+        console.log(action);
+        if (item.id === action.payload) {
+          return { ...item, reserved: !item.reserved };
+        }
+        return item;
       });
-      return {
-        ...state,
-        rockets: newState,
-      };
+      return { ...state, rockets: newState };
     case CANCEL_RESERVATION:
-      const nextState = state.rockets.map((rocket) => {
-        if (rocket.id !== action.payload.id) { return rocket; }
-        return { ...rocket, reserved: false };
+      const newStateR = state.rockets.map((item) => {
+        console.log(action);
+        if (item.id === action.payload) {
+          return { ...item, reserved: !item.reserved };
+        }
+        return item;
       });
-      return {
-        ...state,
-        rockets: nextState,
-      };
+      return { ...state, rockets: newStateR };
     default:
       return state;
   }
