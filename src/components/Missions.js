@@ -1,4 +1,3 @@
-/* eslint-disable */
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import {
@@ -21,45 +20,46 @@ function Missions() {
   const handleJoin = (id) => dispatch(joinMission(id));
   const handleLeave = (id) => dispatch(leaveMission(id));
 
-  console.log(missions)
+  console.log(missions);
   return (
     <div className="missions">
-      <table>
-        <thead key="1">
+      <div>
+        <div key="1">
           <tr>
             <th className="tableHeader">Mission</th>
             <th className="tableHeader">Description</th>
             <th className="tableHeader">Status</th>
             <th aria-label="join mission" />
           </tr>
-        </thead>
-        <tbody>
+        </div>
+        <div>
 
           {missions.map(({
             id, name, description, reserved,
           }) => (
-            <tr
-            ><td>
+            <ul key={id}>
+              <li>
                 <h2 className="fw-bold">{name}</h2>
 
-              </td>
-              <td>
+              </li>
+              <li>
                 <p>{description}</p>
-              </td>
+              </li>
 
-              <td>
+              <li>
                 <ul className="align-middle">
                   {reserved && <h5 className="member">Active Member</h5>}
                   {!reserved && <h5 className="nMember">NOT A MEMBER</h5>}
                 </ul>
-              </td>
+              </li>
 
-              <td>
+              <li>
 
                 <div key={id}>
 
                   {reserved && (
                     <button
+                      type="button"
                       onClick={() => handleLeave(id)}
                       className="leave"
                     >
@@ -68,6 +68,7 @@ function Missions() {
                   )}
                   {!reserved && (
                     <button
+                      type="button"
                       onClick={() => handleJoin(id)}
                       className=""
                     >
@@ -75,12 +76,12 @@ function Missions() {
                     </button>
                   )}
                 </div>
-              </td>
-            </tr>
+              </li>
+            </ul>
           ))}
 
-        </tbody>
-      </table>
+        </div>
+      </div>
     </div>
   );
 }
