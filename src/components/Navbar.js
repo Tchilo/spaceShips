@@ -1,15 +1,29 @@
 import { Link } from 'react-router-dom';
-
 import React from 'react';
+import '../styles/navbar.css';
+
+import logo from '../asset/mylogo.png';
 
 function Navbar() {
   return (
-    <div className="navbar">
-      <div><img src="/src/assets/planet.png" alt="logo" /></div>
-      <Link key="3" to="/">Rockets</Link>
-      <Link key="1" to="/missions">Missions</Link>
-      <Link key="2" to="/my-profile">My Profile</Link>
-    </div>
+    <nav className="navbar">
+      <div className="navbar-container">
+
+        <div className="logoContainer">
+          <img className="logo" src={logo} alt="logo" />
+          <h1> Space Traveler&apos;s hub </h1>
+
+        </div>
+        <div className="link-container">
+          <ul className="nav-elements">
+            <li><Link className="links" activeClassName="activelinks" key="1" to="/missions">Missions</Link></li>
+            <li><Link className="links" activeClassName="activelinks" key="3" to="/">Rockets</Link></li>
+            <li><Link className="links" activeClassName="activelinks" key="2" to="/my-profile">My Profile</Link></li>
+          </ul>
+
+        </div>
+      </div>
+    </nav>
   );
 }
 

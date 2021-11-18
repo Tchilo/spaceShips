@@ -6,6 +6,7 @@ import {
   joinMission,
   leaveMission,
 } from '../redux/missions/missions';
+import '../styles/missions.css';
 
 function Missions() {
   const dispatch = useDispatch();
@@ -22,7 +23,7 @@ function Missions() {
 
   console.log(missions)
   return (
-    <ul>
+    <ul className="table">
       {missions.map(({
         id, name, description, reserved,
       }) => (

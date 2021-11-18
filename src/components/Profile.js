@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchMissions } from '../redux/missions/missions';
 import { fetchRockets } from '../redux/rockets/rockets';
+import '../styles/profile.css';
 
 function Profile() {
   const dispatch = useDispatch();
@@ -17,13 +18,13 @@ function Profile() {
   const reservedMissions = missions.filter((mission) => mission.reserved === true && mission);
   return (
     <section>
-      <div className="reserved-rockets">
+      <div className="container">
         {
           reservedRockets.length
             ? (
               <>
                 <h2>My Rockets</h2>
-                <ul>
+                <ul className="items">
                   {reservedRockets.map((rocket) => (
                     <li key={rocket.id}>
                       {rocket.names}
@@ -38,13 +39,13 @@ function Profile() {
             )
         }
       </div>
-      <div>
+      <div className="container">
         {
           reservedMissions.length
             ? (
               <>
                 <h2>My Missions</h2>
-                <ul>
+                <ul className="items">
                   {reservedMissions.map((mission) => (
                     <li key={mission.id}>
                       {mission.name}

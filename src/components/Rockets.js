@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { cancelReservation, fetchRockets, reserve } from '../redux/rockets/rockets';
+import '../styles/rocket.css';
 
 function Rockets() {
   const rocketReducer = useSelector((state) => state.rockets.rockets);
@@ -15,41 +16,56 @@ function Rockets() {
   }, []);
 
   return (
-    <div>
+    <div className="rockets-container d-flex grid">
       {rocketReducer.map((rocket) => {
         const {
           id, images, names, description, reserved,
         } = rocket;
         return (
 
-          <ul key={id}>
-            <li key={id}>
+          <div className="rockets-container d-flex" key={id}>
+            <div className="img-container">
               <img src={images[0]} alt={names} />
+
+            </div>
+
+            <h2 className="rocket-name">
               {rocket.names}
-              <p>{description}</p>
+              {' '}
+            </h2>
+
+            <p className="rocket-description">
+              <span className="description-span">
+                {description}
+              </span>
+            </p>
+            <div className="btns">
 
               {(!reserved && (
-                <button
-                  type="button"
-                  onClick={() => {
-                    handleReserve(id);
-                  }}
-                >
-                  Rocket Reserve
-                </button>
+              <button
+                className="reserve-btn"
+                type="button"
+                onClick={() => {
+                  handleReserve(id);
+                }}
+              >
+                Rocket Reserve
+              </button>
               ))}
               {(reserved && (
-                <button
-                  type="button"
-                  onClick={() => {
-                    handleCancel(id);
-                  }}
-                >
-                  Cancel Reservation
-                </button>
+              <button
+                type="button"
+                className="c-btn"
+                onClick={() => {
+                  handleCancel(id);
+                }}
+              >
+                Cancel Reservation
+              </button>
               ))}
-            </li>
-          </ul>
+            </div>
+
+          </div>
 
         );
       })}
