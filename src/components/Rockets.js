@@ -1,12 +1,9 @@
-/* eslint-disable */
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { cancelReservation, fetchRockets, reserve } from '../redux/rockets/rockets';
 
 function Rockets() {
   const rocketReducer = useSelector((state) => state.rockets.rockets);
-  console.log(rocketReducer);
-  const [showResrved, setshowReserved] = useState(true);
   const dispatch = useDispatch();
   const handleReserve = (id) => dispatch(reserve(id));
   const handleCancel = (id) => dispatch(cancelReservation(id));
@@ -21,7 +18,7 @@ function Rockets() {
     <div>
       {rocketReducer.map((rocket) => {
         const {
-          id, images, names, description,
+          id, images, names, description, reserved,
         } = rocket;
         return (
 
@@ -30,22 +27,21 @@ function Rockets() {
               <img src={images[0]} alt={names} />
               {rocket.names}
               <p>{description}</p>
-              {(showResrved && (
+
+              {(!reserved && (
                 <button
                   type="button"
                   onClick={() => {
-                    setshowReserved(false);
                     handleReserve(id);
                   }}
                 >
                   Rocket Reserve
                 </button>
               ))}
-              {(!showResrved && (
+              {(reserved && (
                 <button
                   type="button"
                   onClick={() => {
-                    setshowReserved(true);
                     handleCancel(id);
                   }}
                 >
@@ -58,7 +54,7 @@ function Rockets() {
         );
       })}
     </div>
-  )
+  );
 }
 
 export default Rockets;
