@@ -5,7 +5,6 @@ import './index.css';
 import App from './App';
 import store from './redux/configureStore';
 
-// console.log(store.getState().rockets);
 ReactDOM.render(
   <Provider store={store}>
     <App />
