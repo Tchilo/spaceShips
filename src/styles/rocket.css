@@ -60,6 +60,11 @@
   font-weight: bold;
 }
 
+.reserve {
+  background-color: rgb(165, 165, 247);
+  padding: 2px;
+  margin-right: 2px;
+}
 .reserved {
   background-color: white;
   border: 1px solid gray;

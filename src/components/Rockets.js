@@ -35,6 +35,9 @@ function Rockets() {
             </h2>
 
             <p className="rocket-description">
+              <button type="button" className="reserve">
+                {reserved && <h5>Reserved</h5>}
+              </button>
               <span className="description-span">
                 {description}
               </span>
