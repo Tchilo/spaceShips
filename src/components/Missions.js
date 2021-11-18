@@ -25,12 +25,12 @@ function Missions() {
     <div className="missions">
       <div>
         <div key="1">
-          <tr>
-            <th className="tableHeader">Mission</th>
-            <th className="tableHeader">Description</th>
-            <th className="tableHeader">Status</th>
-            <th aria-label="join mission" />
-          </tr>
+          <ul>
+            <li className="tableHeader">Mission</li>
+            <li className="tableHeader">Description</li>
+            <li className="tableHeader">Status</li>
+            <li aria-label="join mission" />
+          </ul>
         </div>
         <div>
 
