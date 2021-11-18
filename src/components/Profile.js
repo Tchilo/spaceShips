@@ -26,7 +26,7 @@ function Profile() {
                 <ul>
                   {reservedRockets.map((rocket) => (
                     <li key={rocket.id}>
-                      {rocket.name}
+                      {rocket.names}
                     </li>
                   ))}
                 </ul>
