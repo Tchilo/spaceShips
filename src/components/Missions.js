@@ -23,20 +23,45 @@ function Missions() {
 
   console.log(missions)
   return (
-    <ul className="table">
+    <div className="missions">
+      <table>
+          <thead key="1">
+            <tr>
+              <th className="tableHeader">Mission</th>
+              <th className="tableHeader">Description</th>
+              <th className="tableHeader">Status</th>
+              <th aria-label="join mission" />
+            </tr>
+          </thead>
+          <tbody>
+
       {missions.map(({
         id, name, description, reserved,
       }) => (
-        <li key={id}>
+        <tr
+        ><td>
           <h2 className="fw-bold">{name}</h2>
-          <p>{description}</p>
-          <ul className="align-middle">
-            {reserved && <h5>Active Member</h5>}
-            {!reserved && <h5>NOT A MEMBER</h5>}
+          
+        </td>
+        <td>
+        <p>{description}</p>
+        </td>
+        
+        <td>
+        <ul className="align-middle">
+            {reserved && <h5 className="member">Active Member</h5>}
+            {!reserved && <h5 className="nMember">NOT A MEMBER</h5>}
           </ul>
+        </td>
+
+        <td>
+
+        <div key={id}>
+          
           {reserved && (
             <button
               onClick={() => handleLeave(id)}
+              className="leave"
             >
               Leave Mission
             </button>
@@ -44,13 +69,19 @@ function Missions() {
           {!reserved && (
             <button
               onClick={() => handleJoin(id)}
+              className=""
             >
               Join Mission
             </button>
           )}
-        </li>
+        </div>
+        </td>
+        </tr>
       ))}
-    </ul>
+    
+    </tbody>
+    </table>
+    </div>
   );
 }
 
