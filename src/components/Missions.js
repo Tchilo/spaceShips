@@ -7,7 +7,6 @@ import {
   leaveMission,
 } from '../redux/missions/missions';
 
-
 function Missions() {
   const dispatch = useDispatch();
   const missions = useSelector((state) => state.missions.missions);
@@ -21,7 +20,7 @@ function Missions() {
   const handleJoin = (id) => dispatch(joinMission(id));
   const handleLeave = (id) => dispatch(leaveMission(id));
 
-
+  console.log(missions)
   return (
     <ul>
       {missions.map(({
@@ -30,10 +29,10 @@ function Missions() {
         <li key={id}>
           <h2 className="fw-bold">{name}</h2>
           <p>{description}</p>
-          <p className="align-middle">
+          <ul className="align-middle">
             {reserved && <h5>Active Member</h5>}
             {!reserved && <h5>NOT A MEMBER</h5>}
-          </p>
+          </ul>
           {reserved && (
             <button
               onClick={() => handleLeave(id)}
@@ -50,7 +49,6 @@ function Missions() {
           )}
         </li>
       ))}
-      <h2>missions</h2>
     </ul>
   );
 }

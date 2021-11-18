@@ -1,7 +1,7 @@
-
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchMissions } from '../redux/missions/missions';
+import { fetchRockets } from '../redux/rockets/rockets';
 
 function Profile() {
   const dispatch = useDispatch();
@@ -11,6 +11,7 @@ function Profile() {
   useEffect(() => {
     if (!missions.length) {
       dispatch(fetchMissions);
+      dispatch(fetchRockets);
     }
   }, []);
   const reservedMissions = missions.filter((mission) => mission.reserved === true && mission);

@@ -1,36 +1,29 @@
 /* eslint-disable no-case-declarations */
 // import * as api from '../../api/api';
-
 const url = 'https://api.spacexdata.com/v3/rockets';
 const GET_ROCKETS = 'GET_ROCKETS';
 const RESERVE_ROCKET = 'RESERVE_ROCKETS';
 const FETCHING_ROCKETS_FAILED = 'FETCHING_ROCKETS_FAILED';
 const CANCEL_RESERVATION = 'CANCEL_RESERVATION';
-
 const initialState = {
   rockets: [],
 };
-
 const loadRockets = (rockets) => ({
   type: GET_ROCKETS,
   payload: rockets,
 });
-
 export const reserve = (id) => ({
   type: RESERVE_ROCKET,
   payload: id,
 });
-
 export const cancelReservation = (id) => ({
   type: CANCEL_RESERVATION,
   payload: id,
 });
-
 const fetchingDataFailed = (err) => ({
   type: FETCHING_ROCKETS_FAILED,
   payload: err,
 });
-
 export const fetchRockets = () => async (dispatch) => {
   try {
     const response = await fetch(url);
@@ -39,10 +32,10 @@ export const fetchRockets = () => async (dispatch) => {
       loadRockets(
         rockets.map((rocket) => {
           const {
-            id, rocket_name: names, flickr_images: images, description,
+            id, rocket_name: names, flickr_images: images, description, reserved,
           } = rocket;
           return {
-            id, names, images, description,
+            id, names, images, description, reserved,
           };
         }),
       ),
@@ -52,7 +45,6 @@ export const fetchRockets = () => async (dispatch) => {
     dispatch(fetchingDataFailed(err.description));
   }
 };
-
 const rocketReducer = (state = initialState, action) => {
   switch (action.type) {
     case GET_ROCKETS:
@@ -60,7 +52,6 @@ const rocketReducer = (state = initialState, action) => {
         ...state,
         rockets: action.payload,
       };
-
     case FETCHING_ROCKETS_FAILED:
       return {
         ...state,
@@ -89,5 +80,4 @@ const rocketReducer = (state = initialState, action) => {
       return state;
   }
 };
-
 export default rocketReducer;
