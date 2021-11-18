@@ -18,12 +18,12 @@ const loadRockets = (rockets) => ({
 
 export const reserve = (id) => ({
   type: RESERVE_ROCKET,
-  id,
+  payload: id,
 });
 
 export const cancelReservation = (id) => ({
   type: CANCEL_RESERVATION,
-  id,
+  payload: id,
 });
 
 const fetchingDataFailed = (err) => ({
@@ -35,7 +35,6 @@ export const fetchRockets = () => async (dispatch) => {
   try {
     const response = await fetch(url);
     const rockets = await response.json();
-    console.log(rockets);
     dispatch(
       loadRockets(
         rockets.map((rocket) => {
@@ -70,7 +69,7 @@ const rocketReducer = (state = initialState, action) => {
       };
     case RESERVE_ROCKET:
       const newState = state.rockets.map((rocket) => {
-        if (rocket.id !== action.id) { return rocket; }
+        if (rocket.id !== action.payload.id) { return rocket; }
         return { ...rocket, reserved: true };
       });
       return {
@@ -79,7 +78,7 @@ const rocketReducer = (state = initialState, action) => {
       };
     case CANCEL_RESERVATION:
       const nextState = state.rockets.map((rocket) => {
-        if (rocket.id !== action.id) { return rocket; }
+        if (rocket.id !== action.payload.id) { return rocket; }
         return { ...rocket, reserved: false };
       });
       return {
