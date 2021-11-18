@@ -1,20 +1,25 @@
-/* eslint-disable */
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
 import Missions from './components/Missions';
 import Profile from './components/Profile';
 import Rockets from './components/Rockets';
 import Navbar from './components/Navbar';
+import './App.css';
 
 const App = () => (
-    <Router>
-        <Navbar />
-        <Routes>
-            <Route path="/" element={<Rockets />} />
-            <Route path="/missions" element={<Missions />} />
-            <Route path="/my-profile" element={<Profile />} />
-        </Routes>
+  <Router>
+    <Navbar />
+    <main>
+      <div className="container">
 
-    </Router>
+        <Routes>
+          <Route path="/" element={<Rockets />} />
+          <Route path="/missions" element={<Missions />} />
+          <Route path="/my-profile" element={<Profile />} />
+        </Routes>
+      </div>
+    </main>
+
+  </Router>
 );
 
 export default App;
