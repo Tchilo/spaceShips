@@ -16,8 +16,8 @@ function Navbar() {
         </div>
         <div className="link-container">
           <ul className="nav-elements">
-            <li><Link className="links" activeClassName="activelinks" key="1" to="/missions">Missions</Link></li>
             <li><Link className="links" activeClassName="activelinks" key="3" to="/">Rockets</Link></li>
+            <li><Link className="links" activeClassName="activelinks" key="1" to="/missions">Missions</Link></li>
             <li><Link className="links" activeClassName="activelinks" key="2" to="/my-profile">My Profile</Link></li>
           </ul>
 

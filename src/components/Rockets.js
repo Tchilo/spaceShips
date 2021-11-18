@@ -45,26 +45,26 @@ function Rockets() {
             <div className="btns">
 
               {(!reserved && (
-              <button
-                className="reserve-btn"
-                type="button"
-                onClick={() => {
-                  handleReserve(id);
-                }}
-              >
-                Rocket Reserve
-              </button>
+                <button
+                  className="reserve-btn"
+                  type="button"
+                  onClick={() => {
+                    handleReserve(id);
+                  }}
+                >
+                  Rocket Reserve
+                </button>
               ))}
               {(reserved && (
-              <button
-                type="button"
-                className="c-btn"
-                onClick={() => {
-                  handleCancel(id);
-                }}
-              >
-                Cancel Reservation
-              </button>
+                <button
+                  type="button"
+                  className="c-btn"
+                  onClick={() => {
+                    handleCancel(id);
+                  }}
+                >
+                  Cancel Reservation
+                </button>
               ))}
             </div>
 
