@@ -5,11 +5,12 @@
 }
 
 .grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 10px;
-    padding: 12px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  padding: 12px;
 }
+
 .info-container,
 .rockets-container {
   flex-direction: column;
@@ -64,14 +65,12 @@
   border: 1px solid gray;
   color: gray;
   font-weight: normal;
-  padding: 12px;
   margin: 5px;
   padding: 12px;
-  margin: 5px;
 }
 
 .c-btn {
-    background-color: rgb(251, 23, 23);
+  background-color: rgb(251, 23, 23);
   border: 1px solid gray;
   border-radius: 4px;
   color: #fff;
@@ -85,8 +84,9 @@
 }
 
 .rocket-description {
-    width: 18rem;
+  width: 18rem;
 }
+
 button {
-    padding: 12px;
+  padding: 12px;
 }

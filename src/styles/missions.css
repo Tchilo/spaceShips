@@ -22,7 +22,6 @@ th {
   background-color: white;
 }
 
-
 tr:nth-child(odd) {
   background-color: #e4e4e4;
 }
@@ -30,7 +29,6 @@ tr:nth-child(odd) {
 .nMember {
   background-color: rgb(243, 240, 76);
   padding: 5px 10px;
-  
 }
 
 .member {
@@ -39,7 +37,6 @@ tr:nth-child(odd) {
   color: white;
   border-radius: 3px;
   padding: 10px;
-
 }
 
 .leave {
