@@ -1,5 +1,4 @@
 /* eslint-disable no-case-declarations */
-// import * as api from '../../api/api';
 
 const url = 'https://api.spacexdata.com/v3/rockets';
 const GET_ROCKETS = 'GET_ROCKETS';

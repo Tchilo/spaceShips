@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { cancelReservation, fetchRockets, reserve } from '../redux/rockets/rockets';
 import '../styles/rocket.css';
 
-function Rockets() {
+const Rockets = () => {
   const rocketReducer = useSelector((state) => state.rockets.rockets);
   const dispatch = useDispatch();
   const handleReserve = (id) => dispatch(reserve(id));
@@ -74,6 +74,6 @@ function Rockets() {
       })}
     </div>
   );
-}
+};
 
 export default Rockets;

@@ -7,7 +7,7 @@ import {
 } from '../redux/missions/missions';
 import '../styles/missions.css';
 
-function Missions() {
+const Missions = () => {
   const dispatch = useDispatch();
   const missions = useSelector((state) => state.missions.missions);
 
@@ -20,70 +20,69 @@ function Missions() {
   const handleJoin = (id) => dispatch(joinMission(id));
   const handleLeave = (id) => dispatch(leaveMission(id));
 
-  console.log(missions);
   return (
     <div className="missions">
-      <div>
-        <div key="1">
-          <ul>
-            <li className="tableHeader">Mission</li>
-            <li className="tableHeader">Description</li>
-            <li className="tableHeader">Status</li>
-            <li aria-label="join mission" />
-          </ul>
-        </div>
-        <div>
+      <table>
+        <thead key="1">
+          <tr>
+            <th className="tableHeader">Mission</th>
+            <th className="tableHeader">Description</th>
+            <th className="tableHeader">Status</th>
+            <th aria-label="join mission" />
+          </tr>
+        </thead>
+        <tbody>
 
           {missions.map(({
             id, name, description, reserved,
           }) => (
-            <ul key={id}>
-              <li>
+            <tr key={id}>
+              <td>
                 <h2 className="fw-bold">{name}</h2>
 
-              </li>
-              <li>
+              </td>
+              <td>
                 <p>{description}</p>
-              </li>
+              </td>
 
-              <li>
+              <td>
                 <ul className="align-middle">
                   {reserved && <h5 className="member">Active Member</h5>}
                   {!reserved && <h5 className="nMember">NOT A MEMBER</h5>}
                 </ul>
-              </li>
+              </td>
 
-              <li>
+              <td>
 
                 <div key={id}>
 
                   {reserved && (
                     <button
-                      type="button"
                       onClick={() => handleLeave(id)}
                       className="leave"
+                      type="button"
+
                     >
                       Leave Mission
                     </button>
                   )}
                   {!reserved && (
                     <button
-                      type="button"
                       onClick={() => handleJoin(id)}
-                      className=""
+                      type="button"
                     >
                       Join Mission
                     </button>
                   )}
                 </div>
-              </li>
-            </ul>
+              </td>
+            </tr>
           ))}
 
-        </div>
-      </div>
+        </tbody>
+      </table>
     </div>
   );
-}
+};
 
 export default Missions;

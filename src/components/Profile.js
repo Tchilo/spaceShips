@@ -4,7 +4,7 @@ import { fetchMissions } from '../redux/missions/missions';
 import { fetchRockets } from '../redux/rockets/rockets';
 import '../styles/profile.css';
 
-function Profile() {
+const Profile = () => {
   const dispatch = useDispatch();
   const missions = useSelector((state) => state.missions.missions);
   const rockets = useSelector((state) => state.rockets.rockets);
@@ -62,6 +62,6 @@ function Profile() {
       </div>
     </section>
   );
-}
+};
 
 export default Profile;
