@@ -20,7 +20,7 @@ Additional description about the project and its features.
 
 ## Live Demo
 
-[Live demo](https://space-travelers-hub-tchilo.netlify.app/) 
+[Live demo](https://spaceships.netlify.app/) 
 
 ## Getting Started
 
