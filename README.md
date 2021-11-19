@@ -20,7 +20,7 @@ Additional description about the project and its features.
 
 ## Live Demo
 
-[Comming Soon]() 
+[Live demo](https://space-travelers-hub-tchilo.netlify.app/) 
 
 ## Getting Started
 
@@ -78,9 +78,9 @@ See the section about [running tests](https://facebook.github.io/create-react-ap
 
 - GitHub: [Tchilo](https://github.com/Tchilo)
 
-### yahyaelganyni1
+### Yahya
 
-- GitHub: [Tchilo](https://github.com/yahyaelganyni1)
+- GitHub: [Yahya](https://github.com/yahyaelganyni1)
 
 
 ## 🤝 Contributing
