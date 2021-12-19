@@ -1,4 +1,3 @@
-/* eslint-disable */
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import {
@@ -8,7 +7,7 @@ import {
 } from '../redux/missions/missions';
 import '../styles/missions.css';
 
-function Missions() {
+const Missions = () => {
   const dispatch = useDispatch();
   const missions = useSelector((state) => state.missions.missions);
 
@@ -21,7 +20,6 @@ function Missions() {
   const handleJoin = (id) => dispatch(joinMission(id));
   const handleLeave = (id) => dispatch(leaveMission(id));
 
-  console.log(missions)
   return (
     <div className="missions">
       <table>
@@ -38,8 +36,8 @@ function Missions() {
           {missions.map(({
             id, name, description, reserved,
           }) => (
-            <tr
-            ><td>
+            <tr key={id}>
+              <td>
                 <h2 className="fw-bold">{name}</h2>
 
               </td>
@@ -62,6 +60,8 @@ function Missions() {
                     <button
                       onClick={() => handleLeave(id)}
                       className="leave"
+                      type="button"
+
                     >
                       Leave Mission
                     </button>
@@ -69,7 +69,7 @@ function Missions() {
                   {!reserved && (
                     <button
                       onClick={() => handleJoin(id)}
-                      className=""
+                      type="button"
                     >
                       Join Mission
                     </button>
@@ -83,6 +83,6 @@ function Missions() {
       </table>
     </div>
   );
-}
+};
 
 export default Missions;
